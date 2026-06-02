@@ -194,6 +194,7 @@ class TeamForm(CustomQuestionsFormMixin, forms.ModelForm):
                 self.fields.pop('break_categories')
             else:
                 self.fields['break_categories'].queryset = bcs
+                self.fields['break_categories'].widget = forms.CheckboxSelectMultiple()
 
         self.add_question_fields()
 
@@ -249,6 +250,7 @@ class SpeakerForm(CustomQuestionsFormMixin, forms.ModelForm):
 
         if 'categories' in self.fields:
             self.fields['categories'].queryset = self.tournament.speakercategory_set.filter(public=True)
+            self.fields['categories'].widget = forms.CheckboxSelectMultiple()
 
         self.add_question_fields()
 
