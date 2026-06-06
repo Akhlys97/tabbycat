@@ -15,9 +15,10 @@ from participants.models import Person
 from tournaments.models import Round, Tournament
 
 from .models import BulkNotification, EmailStatus, SentMessage
-from .utils import (AdjudicatorAssignmentEmailGenerator, BallotsEmailGenerator, InstitutionRegistrationEmailGenerator,
-                    MotionReleaseEmailGenerator, NotificationContextGenerator, RandomizedUrlEmailGenerator,
-                    SlotsAllocatedEmailGenerator, StandingsEmailGenerator, TeamDrawEmailGenerator, TeamSpeakerEmailGenerator)
+from .utils import (AdjudicatorAssignmentEmailGenerator, BallotsEmailGenerator, InstitutionCustomEmailGenerator,
+                    InstitutionRegistrationEmailGenerator, MotionReleaseEmailGenerator, NotificationContextGenerator,
+                    RandomizedUrlEmailGenerator, SlotsAllocatedEmailGenerator, StandingsEmailGenerator,
+                    TeamDrawEmailGenerator, TeamSpeakerEmailGenerator)
 
 
 class NotificationQueueConsumer(SyncConsumer):
@@ -32,6 +33,7 @@ class NotificationQueueConsumer(SyncConsumer):
         BulkNotification.EventType.TEAM_DRAW: TeamDrawEmailGenerator,
         BulkNotification.EventType.INSTITUTION_REG: InstitutionRegistrationEmailGenerator,
         BulkNotification.EventType.SLOTS_ALLOCATED: SlotsAllocatedEmailGenerator,
+        BulkNotification.EventType.INSTITUTION_CUSTOM: InstitutionCustomEmailGenerator,
         BulkNotification.EventType.CUSTOM: NotificationContextGenerator,
     }
 
